@@ -2,12 +2,12 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: nats-project
-  namespace: argocd
+  namespace: openshift-gitops
 spec:
   project: default
   source:
     chart: nats
-    repoURL: https://github.com/nats-io/k8s/tree/main/helm/charts/nats
+    repoURL: https://nats-io.github.io/k8s/helm/charts/
     targetRevision: 0.18.3
     helm:
       releaseName: nats
