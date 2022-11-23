@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nats-project
+  namespace: argocd
+spec:
+  project: default
+  source:
+    chart: nats
+    repoURL: https://github.com/nats-io/k8s/tree/main/helm/charts/nats
+    targetRevision: 0.18.3
+    helm:
+      releaseName: nats
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: nats-deployment
