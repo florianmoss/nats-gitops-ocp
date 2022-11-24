@@ -4,8 +4,8 @@ metadata:
   name: openshift-gitops-operator
   namespace: openshift-operators
 spec:
-  channel: stable 
+  channel: patch-me-see-overlays-dir
   installPlanApproval: Automatic
-  name: openshift-gitops-operator 
-  source: redhat-operators 
-  sourceNamespace: openshift-marketplace 
+  name: openshift-gitops-operator
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
