@@ -1,4 +1,6 @@
 # GitOps Installation
+
+Go with `latestst` channel for now.
 ```
 oc apply -k openshift-gitops-operator/overlays/<channel>
 oc apply -k openshift-gitops-operator/overlays/latest
