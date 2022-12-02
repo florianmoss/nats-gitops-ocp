@@ -7,5 +7,5 @@ spec:
   channel: patch-me-see-overlays-dir
   installPlanApproval: Automatic
   name: openshift-gitops-operator
-  source: redhat-operators
+  source: redhat-operator
   sourceNamespace: openshift-marketplace
