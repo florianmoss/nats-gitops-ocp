@@ -14,7 +14,7 @@ oc apply -k advanced-cluster-security-operator/instance/overlays/default
 
 This will create a stackrox namespace and install central as well as a the securedcluster. Stackrox requires a cluster-init bundle to be deployed to link the two, a job will run to do this. If for some reason you do not see data in ACS and no cluster appears in the Settings check the job logs to see what happened.
 
-## Log into ACS ad Admin
+## Log into ACS as Admin
 
 Get admin password:
 ```
