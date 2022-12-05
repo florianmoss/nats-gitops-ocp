@@ -38,7 +38,8 @@ To invoke it with an API token created in ACS:
 
 `ansible-playbook acs.yaml -e api_token=XXXXXXX -e api_endpoint=central-stackrox.apps.kaby.demolab.local`
 
-## Synce the manifests
+
+## Sync the manifests
 https://docs.openshift.com/acs/3.72/configuration/enable-offline-mode.html#update-kernel-support-packages_enable-offline-mode
 
 https://docs.openshift.com/acs/3.72/configuration/enable-offline-mode.html#download-kernel-support-package_enable-offline-mode
@@ -79,11 +80,11 @@ oc adm policy add-cluster-role-to-group cluster-admin cluster-admins
 
 ## Log into ArgoCD as Admin (not needed, info only)
 ```
-   ARGOCD_ADMIN_PASSWORD=$(oc -n openshift-gitops get secret openshift-gitops-cluster -o jsonpath="{.data.*}" | base64 -d)
+ARGOCD_ADMIN_PASSWORD=$(oc -n openshift-gitops get secret openshift-gitops-cluster -o jsonpath="{.data.*}" | base64 -d)
 
-    ARGOCD_ROUTE=$(oc -n openshift-gitops get route openshift-gitops-server -o jsonpath='{.spec.host}')
+ARGOCD_ROUTE=$(oc -n openshift-gitops get route openshift-gitops-server -o jsonpath='{.spec.host}')
 
-    argocd login $ARGOCD_ROUTE --username admin --password $ARGOCD_ADMIN_PASSWORD
+argocd login $ARGOCD_ROUTE --username admin --password $ARGOCD_ADMIN_PASSWORD
 ```
 
 
