@@ -1,3 +1,51 @@
+# ACS Installation
+
+## Via Kustomize
+To install the operator and instance using kustomize, first install the operator as follows:
+```
+oc apply -k advanced-cluster-security-operator/operator/overlays/latest
+```
+
+Once the operator is running in openshift-operators you can then install an instance with the following command:
+
+```
+oc apply -k advanced-cluster-security-operator/instance/overlays/default
+```
+
+This will create a stackrox namespace and install central as well as a the securedcluster. Stackrox requires a cluster-init bundle to be deployed to link the two, a job will run to do this. If for some reason you do not see data in ACS and no cluster appears in the Settings check the job logs to see what happened.
+
+## Log into ACS ad Admin
+
+Get admin password:
+```
+oc -n stackrox get secret central-htpasswd -o go-template='{{index .data "password" | base64decode}}'
+```
+
+Get Route:
+```
+oc get route -n stackrox central -o jsonpath='{"https://"}{.spec.host}{"\n"}'
+```
+
+## Configure ACS Authentication
+
+You can invoke the playbook by passing either username/password or API token to the playbook. To use it with the default Central username/password:
+
+`ansible-playbook acs.yaml -e username=admin -e password=XXXXXX -e api_endpoint=central-stackrox.apps.kaby.demolab.local`
+
+The actual role mappings can be configured under `vars/vars.yaml` -> `role_mappings:`
+
+To invoke it with an API token created in ACS:
+
+`ansible-playbook acs.yaml -e api_token=XXXXXXX -e api_endpoint=central-stackrox.apps.kaby.demolab.local`
+
+## Synce the manifests
+https://docs.openshift.com/acs/3.72/configuration/enable-offline-mode.html#update-kernel-support-packages_enable-offline-mode
+
+https://docs.openshift.com/acs/3.72/configuration/enable-offline-mode.html#download-kernel-support-package_enable-offline-mode
+
+https://docs.openshift.com/acs/3.72/configuration/enable-offline-mode.html#download-scanner-definitions_enable-offline-mode
+
+
 # GitOps Installation
 
 Go with `latestst` channel for now.
@@ -38,33 +86,6 @@ oc adm policy add-cluster-role-to-group cluster-admin cluster-admins
     argocd login $ARGOCD_ROUTE --username admin --password $ARGOCD_ADMIN_PASSWORD
 ```
 
-# ACS Installation
-
-## Via Kustomize
-To install the operator and instance using kustomize, first install the operator as follows:
-```
-oc apply -k advanced-cluster-security-operator/operator/overlays/latest
-```
-
-Once the operator is running in openshift-operators you can then install an instance with the following command:
-
-```
-oc apply -k advanced-cluster-security-operator/instance/overlays/default
-```
-
-This will create a stackrox namespace and install central as well as a the securedcluster. Stackrox requires a cluster-init bundle to be deployed to link the two, a job will run to do this. If for some reason you do not see data in ACS and no cluster appears in the Settings check the job logs to see what happened.
-
-## Log into ACS ad Admin
-
-Get admin password:
-```
-oc -n stackrox get secret central-htpasswd -o go-template='{{index .data "password" | base64decode}}'
-```
-
-Get Route:
-```
-oc get route -n stackrox central -o jsonpath='{"https://"}{.spec.host}{"\n"}'
-```
 
 # NATS
 1. Allow NATS to run as root: `oc adm policy add-scc-to-user privileged system:admin:default`
