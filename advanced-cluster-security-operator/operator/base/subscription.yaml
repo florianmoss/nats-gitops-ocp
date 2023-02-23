@@ -7,4 +7,4 @@ spec:
   installPlanApproval: Automatic
   name: rhacs-operator
   source: redhat-operators
-  sourceNamespace: openshift-operator
+  sourceNamespace: redhat-operator
