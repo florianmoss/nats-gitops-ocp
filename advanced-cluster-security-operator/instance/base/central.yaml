@@ -19,7 +19,7 @@ spec:
       persistentVolumeClaim:
         claimName: stackrox-db
   egress:
-    connectivityPolicy: Offline
+    connectivityPolicy: Online
   scanner:
     analyzer:
       scaling:
