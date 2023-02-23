@@ -6,5 +6,5 @@ spec:
   channel: patch-me-in-overlays
   installPlanApproval: Automatic
   name: rhacs-operator
-  source: redhat-operator
-  sourceNamespace: openshift-marketplace
+  source: redhat-operators
+  sourceNamespace: openshift-operator
